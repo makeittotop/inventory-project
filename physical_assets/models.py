@@ -49,11 +49,15 @@ class Asset_Detail(model.Model):
     asset_notes = models.TextField('notes on asset')
 
     asset_name = models.CharField('name of asset', max_length=200)
+
+    asset_computer = models.ForeignKey(Asset_Computer)
     
 class Asset_Purchase_Detail(model.Model):
     asset_lpo = models.CharField('l.p.o of asset', max_length=200)
     asset_invoice = models.CharField('invoice of asset', max_length=200)
     asset_supplier = models.CharField('supplier of asset', max_length=200)
+
+    asset_computer = models.ForeignKey(Asset_Computer)
     
 class Asset_Computer(model.Model):
     CORES_CHOICES = (
