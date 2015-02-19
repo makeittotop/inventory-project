@@ -12,15 +12,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='asset_detail',
-            name='computer',
-            field=models.ForeignKey(to='hardware.Computer'),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
             model_name='purchase_detail',
-            name='computer',
-            field=models.ForeignKey(to='hardware.Computer'),
+            name='asset_lpo',
+            field=models.CharField(default=None, max_length=200, verbose_name=b'P.O.'),
             preserve_default=True,
         ),
     ]

@@ -95,7 +95,10 @@ class Asset_Detail(models.Model):
     #asset_name = models.CharField('Identifier/Name', max_length=200, blank=False)
 
     #computer = models.ForeignKey(Computer)
-    computer = models.OneToOneField(Computer)
+    computer = models.OneToOneField(Computer, null=False, blank=False)
+
+    def __str__(self):
+        return "Asset Details"
     
 class Purchase_Detail(models.Model):
     asset_lpo = models.CharField('P.O.', max_length=200, null=False, blank=False)
@@ -105,52 +108,6 @@ class Purchase_Detail(models.Model):
     #computer = models.ForeignKey(Computer)
     computer = models.OneToOneField(Computer)
     
-'''    
-class Computer(models.Model):
-    CORES_CHOICES = (
-        (8, '8'),
-        (16, '16'),
-        (32, '32'),
-        (64, '64'),
-        (96, '96'),
-    )
-    asset_cpu_cores = models.IntegerField('CPU Cores', choices=CORES_CHOICES, max_length=200, blank=False)
-
-    GFX_CARD_CHOICES = (
-      ('K4000', 'K4000'),
-      ('K5000', 'K5000'),
-      ('K3000', 'K3000'),
-    )
-    asset_gfx_card = models.CharField('Graphic Card', choices=GFX_CARD_CHOICES, max_length=200, blank=False)
-
-    RAM_CHOICES = (
-        (8, '8'),
-        (16, '16'),
-        (32, '32'),
-        (64, '64'),
-        (96, '96'),
-    )
-    asset_ram = models.IntegerField('RAM', choices=RAM_CHOICES, max_length=200, blank=False)
-
-    HARD_DISK_CHOICES = (
-        ('250 GB', '250 GB'),
-        ('500 GB', '500 GB'),
-        ('1 TB', '1 TB'),
-    )
-    asset_hard_disk = models.CharField('H.D.D', choices=HARD_DISK_CHOICES, max_length=200, blank=False)
-
-    EXTERNAL_NIC_CHOICES = (
-      ('10G', '10G'),
-    )
-    asset_external_nic = models.CharField('External NIC', choices=EXTERNAL_NIC_CHOICES, max_length=200, blank=False)
-
-    asset_serial_number = models.CharField('Serial Number', max_length=200, null=False, blank=False)
-
-    asset_name = models.CharField('Name', max_length=200, null=False, blank=False)
-
-    #asset_detail = models.OneToOneField(Asset_Detail, primary_key=True)
-    #Purchase_Detail = models.OneToOneField(Purchase_Detail, primary_key=True)
-
     def __str__(self):
-        return "{0} / {1}".format(self.asset_name, self.asset_serial_number)
-'''
+        return "Purchase Details"
+    
