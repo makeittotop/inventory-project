@@ -24,7 +24,6 @@ class Migration(migrations.Migration):
                 ('asset_condition', models.CharField(max_length=200, verbose_name=b'Condition', choices=[(b'new', b'New'), (b'old', b'Old'), (b'broken', b'Broken')])),
                 ('asset_checkout', models.CharField(max_length=200, null=True, verbose_name=b'Used by', blank=True)),
                 ('asset_notes', models.TextField(null=True, verbose_name=b'Notes', blank=True)),
-                ('asset_name', models.CharField(max_length=200, verbose_name=b'Identifier/Name')),
             ],
             options={
             },
@@ -53,7 +52,7 @@ class Migration(migrations.Migration):
                 ('asset_lpo', models.CharField(max_length=200, verbose_name=b'P.O.')),
                 ('asset_invoice', models.CharField(max_length=200, verbose_name=b'Invoice')),
                 ('asset_supplier', models.CharField(max_length=200, verbose_name=b'Supplier')),
-                ('computer', models.ForeignKey(to='hardware.Computer')),
+                ('computer', models.OneToOneField(to='hardware.Computer')),
             ],
             options={
             },
@@ -62,7 +61,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='asset_detail',
             name='computer',
-            field=models.ForeignKey(to='hardware.Computer'),
+            field=models.OneToOneField(to='hardware.Computer'),
             preserve_default=True,
         ),
     ]

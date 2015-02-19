@@ -94,14 +94,16 @@ class Asset_Detail(models.Model):
 
     #asset_name = models.CharField('Identifier/Name', max_length=200, blank=False)
 
-    computer = models.ForeignKey(Computer)
+    #computer = models.ForeignKey(Computer)
+    computer = models.OneToOneField(Computer)
     
 class Purchase_Detail(models.Model):
     asset_lpo = models.CharField('P.O.', max_length=200, null=False, blank=False)
     asset_invoice = models.CharField('Invoice', max_length=200, null=False, blank=False)
     asset_supplier = models.CharField('Supplier', max_length=200, null=False, blank=False)
 
-    computer = models.ForeignKey(Computer)
+    #computer = models.ForeignKey(Computer)
+    computer = models.OneToOneField(Computer)
     
 '''    
 class Computer(models.Model):
@@ -142,7 +144,13 @@ class Computer(models.Model):
     )
     asset_external_nic = models.CharField('External NIC', choices=EXTERNAL_NIC_CHOICES, max_length=200, blank=False)
 
-    #asset_detail = models.OneToOneField(Asset_Detail, primary_key=True)
+    asset_serial_number = models.CharField('Serial Number', max_length=200, null=False, blank=False)
 
+    asset_name = models.CharField('Name', max_length=200, null=False, blank=False)
+
+    #asset_detail = models.OneToOneField(Asset_Detail, primary_key=True)
     #Purchase_Detail = models.OneToOneField(Purchase_Detail, primary_key=True)
+
+    def __str__(self):
+        return "{0} / {1}".format(self.asset_name, self.asset_serial_number)
 '''
