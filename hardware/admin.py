@@ -8,11 +8,11 @@ from hardware.models import Computer, Asset_Detail, Purchase_Detail
 
 class Asset_Detail_Inline(admin.StackedInline):
     model = Asset_Detail
-    #extra = 1
+    #extra = 0
 
 class Purchase_Detail_Inline(admin.StackedInline):
     model = Purchase_Detail
-    #extra = 1
+    #extra = 0
 
 class Computer_Admin(admin.ModelAdmin):
     fieldsets = [

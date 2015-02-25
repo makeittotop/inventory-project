@@ -3,27 +3,25 @@ from django.db import models
 # Create your models here.
 class Computer(models.Model):
     CORES_CHOICES = (
+        (4, '4'),
+        (6, '6'),
         (8, '8'),
         (16, '16'),
-        (32, '32'),
-        (64, '64'),
-        (96, '96'),
+        (20, '20'),
     )
     asset_cpu_cores = models.IntegerField('CPU Cores', choices=CORES_CHOICES, max_length=200, blank=False)
 
     GFX_CARD_CHOICES = (
-      ('K4000', 'K4000'),
-      ('K5000', 'K5000'),
-      ('K3000', 'K3000'),
+      ('Quadro-K4000', 'Quadro K4000'),
+      ('Quadro-K5000', 'Quadro K5000'),
     )
     asset_gfx_card = models.CharField('Graphic Card', choices=GFX_CARD_CHOICES, max_length=200, blank=False)
 
     RAM_CHOICES = (
-        (8, '8'),
+        (4, '4'),
         (16, '16'),
         (32, '32'),
         (64, '64'),
-        (96, '96'),
     )
     asset_ram = models.IntegerField('RAM', choices=RAM_CHOICES, max_length=200, blank=False)
 
@@ -64,8 +62,10 @@ class Asset_Detail(models.Model):
     asset_manufacturer = models.CharField('Manufacturer', choices=MANUFACTURER_CHOICES, max_length=200, blank=False)
 
     MODEL_CHOICES = (
-      ('foo', 'bar'),
-      ('toop', 'buzz' ),
+      ('T360', 'T360'),
+      ('Z420', 'Z420'),
+      ('Z820', 'Z820'),
+      ('9010', '9010' ),
     )
     asset_model = models.CharField('Model', choices=MODEL_CHOICES, max_length=200, blank=False)
 
@@ -85,10 +85,11 @@ class Asset_Detail(models.Model):
       ('new', 'New'),
       ('old', 'Old'),
       ('broken', 'Broken'),
+      ('in-repair', 'In Repair'),
     )
     asset_condition = models.CharField('Condition', choices=CONDITION_CHOICES, max_length=200, blank=False) 
 
-    asset_checkout = models.CharField('Used by', max_length=200, null=True, blank=True)
+    asset_checkout = models.CharField('Assignee', max_length=200, null=True, blank=True)
 
     asset_notes = models.TextField('Notes', null=True, blank=True)
 
@@ -101,9 +102,9 @@ class Asset_Detail(models.Model):
         return "Asset Details"
     
 class Purchase_Detail(models.Model):
-    asset_lpo = models.CharField('P.O.', max_length=200, null=False, blank=False)
-    asset_invoice = models.CharField('Invoice', max_length=200, null=False, blank=False)
-    asset_supplier = models.CharField('Supplier', max_length=200, null=False, blank=False)
+    asset_lpo = models.CharField('P.O. Number', max_length=200, null=False, blank=False)
+    asset_invoice = models.CharField('Invoice Number', max_length=200, null=False, blank=False)
+    asset_supplier = models.CharField('Supplier Name', max_length=200, null=False, blank=False)
 
     #computer = models.ForeignKey(Computer)
     computer = models.OneToOneField(Computer)

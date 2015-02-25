@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('asset_status', models.CharField(max_length=200, verbose_name=b'Current Status', choices=[(b'in_use', b'In Use'), (b'spare', b'Spare')])),
                 ('asset_condition', models.CharField(max_length=200, verbose_name=b'Condition', choices=[(b'new', b'New'), (b'old', b'Old'), (b'broken', b'Broken')])),
                 ('asset_checkout', models.CharField(max_length=200, null=True, verbose_name=b'Used by', blank=True)),
-                ('asset_notes', models.TextField(null=True, verbose_name=b'Notes', blank=True)),
+                ('asset_notes', models.TextField(default=b' ', null=True, verbose_name=b'Notes', blank=True)),
             ],
             options={
             },
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('asset_lpo', models.CharField(max_length=200, verbose_name=b'P.O.')),
                 ('asset_invoice', models.CharField(max_length=200, verbose_name=b'Invoice')),
-                ('asset_supplier', models.CharField(max_length=200, verbose_name=b'Supplier')),
+                ('asset_supplier', models.CharField(default=b' ', max_length=200, verbose_name=b'Supplier')),
                 ('computer', models.OneToOneField(to='hardware.Computer')),
             ],
             options={
