@@ -1,0 +1,755 @@
+curl -- /opt/vagrant/bin/../embedded/bin/curl -q --fail --location --max-redirs 10 --user-agent Vagrant/1.6.5 --continue-at - --output /home/abhishek/.vagrant.d/tmp/box64bb03413b28ed7308cbf3eb6160d7bd2b1a5fb3 https://vagrantcloud.com/chef/boxes/centos-6.5/versions/1/providers/virtualbox.box
+curl -XGET 'http://localhost:5984/employee/_design/view_name/_view/_by_name?startkey=%22abhishek%22&endkey=%22foo%22' -v
+curl -XGET 'http://localhost:5984/employee/_design/view_name/_view/_by_name?startkey=%22abhishek%22&endkey=%22foo%22&limit=5' -v
+curl -XPOST 'http://localhost:5984/employee/_design/view_name/_view/_by_name' -v -H 'Content-Type: application/json' --data '{"keys":["abhishek", "foo", "dfdgfdf"]}'
+curl -XPOST 'http://localhost:5984/employee/_design/view_name/_view/_by_name' -v -H 'Content-Type: application/json' --data '{"keys":["abhishek", "foo"]}'
+curl -XGET 'http://localhost:5984/employee/_design/view_name/_view/_by_name?key=%22abhishek%22'
+
+
+
+sudo ldapsearch -x -LLL -h 172.16.10.10:389 -D "abhishek@barajoun.local" -w "qwerty12345" -b "OU=BarajounUSERS,DC=barajoun,DC=local" -s sub '(sAMAccountName=abhishek)' cn mail sn
+
+
+# PostgreSQL - Edit pg_hba.conf to  change the auth system for users to md5. Peer might not work
+> sudo -u postgres createuser --login --createdb --createrole --superuser --pwprompt
+> psql -h 172.16.15.26 --user apareek postgres
+> psql -h 172.16.15.26 --user abhishek test
+> psql --user abhishek -h localhost postgres
+> sudo vi /etc/postgresql/9.3/main/pg_hba.conf
+
+> nmap -sn 16.16.16.2
+> nmap -sn -O 16.16.16.2
+> sudo nmap -sn -O 16.16.16.2
+> sudo nmap -sS -O 16.16.16.2
+> sudo nmap -sn 172.16.15.1/254
+> sudo nmap -sn 172.16.15.1/24
+> sudo nmap -sn 172.16.15.1/24 | less
+> nmap
+> sudo nmap -oG /tmp/online_hosts -sn 172.16.15.1/24
+
+curl -XPOST 'http://lic:1503/Tractor/spool?jobOwner=abhishek&hnm=bjlinux068&cwd=/opt/pixar/tractor-blade-1.7.2&jobFile=/opt/pixar/tractor-blade-1.7.2/printenv' -H 'Content-Type: application/tractor-spool' -H 'Content-Length: 141' -d '##AlfredToDo 3.0\nJob -title {printenv} -subtasks {\n  Task -title {printenv} -cmds {\n    RemoteCmd {{printenv}} -service {pixarRender}\n  }\n}' -v
+curl -XPOST 'http://lic:1503/Tractor/spool' -H 'Content-Type: application/tractor-spool' -H 'Content-Length: 141' -d '##AlfredToDo 3.0\nJob -title {printenv} -subtasks {\n  Task -title {printenv} -cmds {\n    RemoteCmd {{printenv}} -service {pixarRender}\n  }\n}' -v -d'jobOwner=abhishek&hnm=bjlinux068&cwd=/opt/pixar/tractor-blade-1.7.2&jobFile=/opt/pixar/tractor-blade-1.7.2/printenv'
+
+> tmux list-session
+> tmux attach-session -t list-session
+> tmux attach-session -t foobar
+> tmux list-session
+>  ll /tmp/*
+>  ll /tmp/ -t
+> man tmux
+> tmux list-win
+> ll /tmp/tmux-1530923653/default -t
+> file /tmp/tmux-1530923653/default
+> rm /tmp/tmux-1530923653/default
+> file /tmp/tmux-1530923653/default
+> ll /tmp/tmux-1530923653/
+> tmux list-win
+> strace -f -eopen,connect tmux list-win
+connect(6, {sa_family=AF_FILE, path="/tmp//tmux-1530923653/default"}, 31) = -1 ENOENT (No such file or directory)
+failed to connect to server: No such file or directory
+> strace -f -eopen,connect tmux list-sess
+
+
+sudo tcpdump -i eth0 'tcp port 1503 and host 172.16.15.246' -n -nn -A
+1) /etc/init.d/mysql stop
+
+2) mysqld_safe --skip-grant-tables &
+
+3) mysql -u root
+
+4) Setup new MySQL root user password use mysql; update user set password=PASSWORD("NEW-ROOT-PASSWORD") where User='root'; flush privileges; quit
+
+5) Stop MySQL Server: /etc/init.d/mysql stop
+
+6) Start MySQL server and test it: mysql -u root -p
+mysql -u root -pqwerty lightLink < ~/lightLink.sql
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A    
+
+Database changed
+mysql> GRANT ALL PRIVILEGES ON * . * TO 'abhishek'@'172.16.15.246';
+Query OK, 0 rows affected (0.00 sec)  
+
+
+history -d <number_line>
+history -w
+
+export HISTCONTROL=ignorespace
+
+sudo /usr/pgsql-9.3/bin/pg_dump -C -p9876 tractor | /usr/pgsql-9.3/bin/psql -h 172.16.15.246 -p5432 tractor
+
+--
+-- Roles
+--
+
+CREATE ROLE bootstrap;
+ALTER ROLE bootstrap WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION CONNECTION LIMIT 1;
+CREATE ROLE dashboard;
+ALTER ROLE dashboard WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE dev_read;
+ALTER ROLE dev_read WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE dev_write;
+ALTER ROLE dev_write WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE dispatcher;
+ALTER ROLE dispatcher WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE reader;
+ALTER ROLE reader WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE readroles;
+ALTER ROLE readroles WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION;
+CREATE ROLE root;
+ALTER ROLE root WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION;
+CREATE ROLE spooler;
+ALTER ROLE spooler WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION;
+CREATE ROLE writeroles;
+ALTER ROLE writeroles WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION;
+
+
+--
+-- Role memberships
+--
+
+GRANT readroles TO dashboard GRANTED BY root;
+GRANT readroles TO dev_read GRANTED BY root;
+GRANT readroles TO reader GRANTED BY root;
+GRANT writeroles TO bootstrap GRANTED BY root;
+GRANT writeroles TO dev_write GRANTED BY root;
+GRANT writeroles TO dispatcher GRANTED BY root;
+GRANT writeroles TO spooler GRANTED BY root;
+
+  460  sudo /usr/pgsql-9.3/bin/pg_dumpall -p9876 -g -f foo.sql
+  461  cat foo.sql
+  462  /usr/pgsql-9.3/bin/psql -h 172.16.15.246 -p5432 -f foo.sql
+
+
+User time is how many seconds the computer spent doing your calculations. System time is how much time the operating system spent responding to your program's requests. Elapsed time is the sum of those two, plus whatever "waiting around" your program and/or the OS had to do. It's important to note that these numbers are the aggregate of time spent. Your program might compute for 1 second, then wait on the OS for one second, then wait on disk for 3 seconds and repeat this cycle many times while it's running.
+
+# Ruby - LDAP
+2.1.3 :001 > ldap = Net::LDAP.new
+ => #<Net::LDAP:0x0000000636f820 @host="127.0.0.1", @port=389, @verbose=false, @auth={:method=>:anonymous}, @base="dc=com", @force_no_page=false, @encryption=nil, @open_connection=nil>
+2.1.3 :002 > ldap.host = "172.16.10.10"
+ => "172.16.10.10"
+2.1.3 :003 > ldap.port = 389
+ => 389
+2.1.3 :004 > ldap.base = "OU=barajounusers,DC=barajoun,DC=local"
+ => "OU=barajounusers,DC=barajoun,DC=local"
+2.1.3 :005 > ldap.auth "abhishek", "qwerty"
+ => {:method=>:simple, :username=>"abhishek", :password=>"qwerty"}
+2.1.3 :006 > ldap.bind
+ => false
+2.1.3 :007 > ldap.auth "abhishek@barajoun.local", "qwerty"
+ => {:method=>:simple, :username=>"abhishek@barajoun.local", :password=>"qwerty"}
+2.1.3 :008 > ldap.bind
+ => true
+
+# python-ldap
+import ldap
+keyword = sys.argv[1]
+ 
+server = '172.16.10.10'
+port = 389
+
+l = ldap.open(server, port)
+l.simple_bind("abhishek@barajoun.local", "qwerty")
+
+base = 'OU=barajounusers,DC=barajoun,DC=local'
+scope = ldap.SCOPE_SUBTREE
+filter = "cn=" + "*" + keyword + "*"
+retrieve_attributes = None
+
+count = 0
+result_set = []
+timeout = 0
+
+result_id = l.search(base, scope, filter, retrieve_attributes)
+result_type, result_data = l.result(result_id, timeout)
+if result_type == ldap.RES_SEARCH_ENTRY:
+    result_set.append(result_data)
+
+if len(result_set) == 0:
+    print "No Results."
+    return
+ 
+for i in range(len(result_set)):
+    for entry in result_set[i]:
+        name = entry[1]['cn'][0]
+        email = entry[1]['mail'][0]
+        #phone = entry[1]['telephonenumber'][0]
+        #desc = entry[1]['description'][0]
+        count = count + 1
+
+dd if=/dev/zero of=/tmp/10MB.testfile bs=1024 count=12400
+backup perform --trigger tactic_backup
+whenever --update-crontab
+[root@bjtactic Backup]# whenever --update
+[write] crontab file updated
+[root@bjtactic Backup]# crontab -l
+23 6 * * * /root/Hard-disk-alert.sh
+
+# Begin Whenever generated tasks for: /root/Backup/config/schedule.rb
+MAILTO=a.pareek@barajoun.com
+
+30 5 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31 * * /bin/bash -l -c 'backup perform --trigger tactic_backup'
+
+# End Whenever generated tasks for: /root/Backup/config/schedule.r
+    mail.from                 = "a.pareek@barajoun.com"
+    mail.to                   = "a.pareek@barajoun.com"
+    mail.address              = "172.16.10.40"
+    mail.port                 = 25
+    mail.domain               = "barajoun.local"
+    mail.user_name            = "abhishek"
+    mail.password             = "qwerty"
+    mail.authentication       = :LOGIN
+    mail.encryption           = :none
+#Py qt
+  43         super(jobSpooler, self).__init__(parent)
+  44         self.ui = Ui_qSpooler()
+  45         self.ui.setupUi(self)
+  46
+
+pyuic4 <in.ui> -o <out.py>
+
+# celery queue inspection
+>>> from celery.task.control import inspect
+
+# Inspect all nodes.
+>>> i = inspect()
+
+>>> i.scheduled()
+or:
+>>> i.active()
+
+# redis queue inspection
+redis-cli -h lic -p 4444 -n 0 keys \*
+
+
+# perl module installation - centos
+ 1040  yum list available 'perl'
+ 1041  perl -MCPAN -e shell
+ 1042  yum list perl-TimeDate.noarch
+ 1043  yum list perl-CPAN
+ 1044  yum install perl(File::Sync)
+ 1045  yum install "perl(File::Sync)"
+ 1046  yum list perl-File
+ 1047  yum list perl-Net::Telnet
+ 1048  yum search perl
+ 1049  yum install perl
+ 1050  yum -y install perl-CPAN
+ 1051*
+ 1052  perl -MCPAN
+ 1053  yum search perlbrew
+ 1054  yum install perlbrew.noarch
+ 1055  perlbrew install
+ 1056  perlbrew install-File
+ 1057  perlbrew install_cpanm
+ 1058  ll
+ 1059  ./nfsSpeedTest
+ 1060  perlbrew install File::Sync
+ 1061  perlbrew help
+ 1062  perlbrew install http://search.cpan.org/CPAN/authors/id/C/CE/CEVANS/File-Sync-0.09.tar.gz
+ 1063  yum search ppm
+ 1064  cpan
+ 1065  ping www.perl.org
+ 1066  cpan
+ 1067  yum install -y gcc
+ 1068  cpan
+ 1069  ./nfsSpeedTest
+ 1070  history
+
+gvim scp://lic:2212//home/render/task_queue/tasks.py
+# tq to execute the post command to the parent task in a tractor job
+for i in 558 559 562; do `(/opt/pixar/Tractor-2.0/bin/tq commands jid=$i and tid=1 --raw --nh | awk '{print $4 " " $5}')` ; done
+qwerty
+qwerty
+
+
+def daemonize ():
+    '''
+    Perform various actions necessary to place this process
+    in the background, disconnected from the launching terminal
+    and process group, as expected for unix-style daemons.
+    '''
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        pid = os.fork()
+        if pid > 0:
+            # child created, exit first parent
+            os._exit(0)
+
+        # start a new session, disconnected from parent
+        os.chdir("/")
+        os.setsid()
+        os.umask(0)
+
+        # fork again to ensure no connections with controlling terminal
+        pid = os.fork()
+        if pid > 0:
+            # child created, exit from second parent
+            os._exit(0)
+
+        # redirect stdio descriptors
+        sin  = file(os.devnull, 'r')
+        sout = file(os.devnull, 'a+')
+        serr = file(os.devnull, 'a+', 0)
+        os.dup2(sin.fileno(),  sys.stdin.fileno())
+        os.dup2(sout.fileno(), sys.stdout.fileno())
+        os.dup2(serr.fileno(), sys.stderr.fileno())
+
+    except OSError, e:
+        sys.stderr.write("daemonize failed %d, %s\n" % (e.errno, e.strerror))
+        sys.exit(1)
+    except:
+        errclass, excobj = sys.exc_info()[:2]
+        sys.stderr.write( errclass.__name__ + " - " + str(excobj) + '\n' )
+        sys.exit(1)
+
+# Firewall auth via curl
+curl -XPOST http://172.16.1.2:1000/ -v -d 'magic=00040bd9b15123ab' -d 'username=abhishek&password=qwerty' --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0' --referer 'http://172.16.1.2:1000/fgtauth?00040bd9b15123ab' -H '172.16.1.2:1000'
+# Failed auth example
+curl -XPOST http://172.16.1.2:1000/ -v -d '4Tredir=http://www.rediff.com/' -d 'magic=050306deb35b1ea7' -d 'username=abhishek&password=123456' --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Firefox/24.0' --referer 'http://172.16.1.2:1000/fgtauth?050306deb35b1ea7' -H '172.16.1.2:1000'
+# Listening/eavesdropping on a socket
+you can use socat.
+
+sudo mv /path/to/sock /path/to/sock.original
+sudo socat -t100 -x -v UNIX-LISTEN:/path/to/sock,mode=777,reuseaddr,fork UNIX-CONNECT:/path/to/sock.original
+What is happening above: First move original socket to sock.original. Socat creates a new socket ('UNIX-LISTEN') in the originals location and forwards all to the original ('UNIX-connect'). The -v tells socat to also print output to STDERR.
+
+# proc pid pipe - find the other process at the end of a given pipe
+(sudo find /proc -type l | sudo xargs ls -l | fgrep 'pipe:[3065941]') 2> /dev/null
+# docker
+docker commit -m "Add htop and atop to the base centos6.6 image" -a "Abhishek Pareek <makeittotop@gmail.com>" d5c1b2dd4884 abhishekpareek/test_centos_image:v1.1
+# docker essential commands
+ 1172  sudo docker images
+ 1173  sudo docker rm cac7f05b21a0
+ 1174  sudo docker ps -a
+ 1175  sudo docker ps -aq
+ 1176  sudo docker ps -aq -f "status=exited"
+ 1177  sudo docker rm `sudo docker ps -aq -f "status=exited"`
+ 1178  sudo docker images
+ 1179  sudo docker rmi cac7f05b21a0
+ 1180  sudo docker images
+ 1181  sudo docker run -i -t abhishekpareek/queue_mon
+ 1182  sudo docker run -i -t abhishekpareek/queue_mon /bin/bash
+ 1183  mplayer ~/Downloads/container-snapshots.mp3
+ 1184  sudo docker run -i -t abhishekpareek/queue_mon /bin/bash
+ 1185  vi Dockerfile
+ 1186  sudo docker build -t "abhishekpareek/queue_mon:latest" .
+ 1187  sudo docker images
+ 1188  sudo docker run -p
+ 1189  sudo docker run -p 5001:55555 -d abhishekpareek/queue_mon:latest
+ 1190  sudo docker ps
+ 1191  sudo docker logs sick_sammet
+ 1192  sudo docker ps
+ 1193  sudo tcpdump -i eth0 port 5001 -A
+ 1194  sudo lsof -i -P | grep 5001
+ 1195  sudo docker ps
+ 1196  sudo docker
+ 1197  sudo docker exec
+ 1198  sudo docker exec sick_sammet top
+ 1199  sudo docker exec -t sick_sammet top
+ 1200  sudo docker attach
+ 1201  sudo docker attach sick_sammet
+ 1202  sudo docker exec -it sick_sammet top
+ 1203  sudo docker ps
+ 1204  sudo docker logs sick_sammet
+ 1205  sudo docker ps -a
+ 1206  sudo docker ps -a -f "status=exited"
+ 1207  sudo docker rm `sudo docker ps -aq -f "status=exited"`
+ 1208  sudo docker ps -a -f "status=exited"
+ 1209  sudo docker run -d abhishekpareek/queue_mon:latest
+ 1210  sudo docker ps
+ 1211  sudo docker logs happy_franklin
+ 1212  sudo docker stop happy_franklin
+ 1213  sudo docker logs happy_franklin
+ 1214  sudo docker ps
+ 1215  sudo docker ps -a -f "status=exited"
+ 1216  sudo docker rm `sudo docker ps -aq -f "status=exited"`
+ 1217  sudo docker run -d -p 6000:55555 abhishekpareek/queue_mon:latest
+ 1218  sudo docker ps
+ 1219  sudo docker logs pensive_pasteur
+ 1220  sudo docker ps
+ 1221  sudo lsof -i -P | grep 6000
+ 1222  sudo docker stop pensive_pasteur
+ 1223  sudo lsof -i -P | grep 6000
+ 1224  sudo docker run -d -p 6001:55555 abhishekpareek/queue_mon:latest
+ 1225  sudo lsof -i -P | grep 6001
+ 1226  sudo docker ps
+ 1227  df -h .
+ 1228  du -shc /tmp
+ 1229  sudo du -shc /tmp
+ 1230  docker exec -it loving_wright ps aux
+ 1231  sudo docker exec -it loving_wright ps aux
+ 1232  sudo docker exec -it loving_wright top
+ 1233  sudo docker exec -it loving_wright ps aux
+ 1234  sudo docker ps
+ 1235  docker exec -it loving_wright ps aux
+ 1236  sudo docker exec -it loving_wright ps aux
+ 1237  sudo docker exec -it loving_wright pidof python
+ 1238  sudo docker exec -it loving_wright pstree -p 1
+
+# To start the docker container which has the latest build for q_mon. Pay Attention to the publish and entrypoint items!
+ sudo docker run --entrypoint=/root/queue_mon/q_mon.py --publish=172.16.15.246:44444:55556 abhishekpareek/queue-mon-latest
+
+strings /home/caine/.Xauthority
+bjlinux068
+MIT-MAGIC-COOKIE-1
+<meta http-equiv="refresh" content="30">
+# auto-referesh a web page
+<meta http-equiv="refresh" content="30">
+    <script type="text/javascript">
+        //page refresh every 5 seconds
+        //setInterval(, 5000);
+    </script>
+window.location.reload(true);
+# Ansible commands
+ 1081  ansible -mping all -vvv -k
+ 1082  ansible -mping all -vvvv -k
+ 1083  sudo mkdir /etc/ansible/host_vars
+ 1084  sudo vi /etc/ansible/hosts
+ 1085  ansible -mping all -vvvv -k
+ 1086  sudo vi /etc/ansible/hosts
+ 1087  sudo vi /etc/ansible/group_vars/test
+ 1088  ansible -mping all -vvvv
+ 1089  sudo vi /etc/ansible/group_vars/test
+ 1090  ansible -mping all -vvvv
+ 1091  ansible -mping all
+ 1092  ansible -mping test
+
+# Finding remote socket data for a process
+[root@lic bin]# ll /proc/15430/fd/8
+lrwx------ 1 render render 64 Jan 18 11:19 /proc/15430/fd/8 -> socket:[2378060735]
+[root@lic bin]# file /proc/15430/fd/8
+/proc/15430/fd/8: broken symbolic link to `socket:[2378060735]'
+[root@lic bin]# egrep 2378060735 /proc/net/tcp
+[root@lic bin]# egrep 2378060735 /proc/net/udp
+   7: 02101010:AD72 6E3FA936:80E9 01 00000000:00000000 00:00000000 00000000   501        0 2378060735 2 ffff8801211cfb40 0
+[root@lic bin]# head -n1 /proc/net/udp; egrep 2378060735 /proc/net/udp
+  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode ref pointer drops
+   7: 02101010:AD72 6E3FA936:80E9 01 00000000:00000000 00:00000000 00000000   501        0 2378060735 2 ffff8801211cfb40 0
+# Convert AD72 from hex to decimal
+[root@lic bin]# netstat -tunlep | grep 44402
+[root@lic bin]# lsof -i -Pnl | grep 44402
+ascp      15418      501    8u  IPv4 2378060735      0t0  UDP 16.16.16.2:44402->54.169.63.110:33001
+# http://sami.on.eniten.com/hex2ip/? hex to ip address
+# http://www.hexdictionary.com/ hex to decimal
+# udp checksum 
+1056  tcpdump -i eth0 16.16.16.2 port 44402 -A
+1057  tcpdump -i eth0 port 44402 -A
+1058  tcpdump -i eth0 port 44402
+1059  tcpdump -i eth0 port 44402 -vv
+1060  ethtool -k eth0 | grep on
+1061  ethtool -K eth0 tx off rx off
+1062  ethtool -k eth0 | grep on
+1063  tcpdump -i eth0 port 44402 -vv -nn
+1064  tcpdump -i eth0 port 44402 -vv -nn -A
+1065  ethtool -K eth0 tx on rx on
+1066  ethtool -k eth0 | grep on
+
+sudo tcpdump -i eth0 -vvv -nn udp dst port 53
+sudo tcpreplay -i eth0 -F -w output.cap input.cap
+sudo tcprewrite -i input.cap -o output.cap -C
+
+# ps -eo lstart gives the launch time of a process
+1121  lsof -i -Pnl | grep 33001 | grep 113 | awk '{print $2}'
+1122  for pid in $(lsof -i -Pnl | grep 33001 | grep 113 | awk '{print $2}'); do ps -eo pid,lstart | grep $pid; done
+1123  for pid in $(lsof -i -Pnl | grep 33001 | grep 113 | awk '{print $2}'); do kill -9 $pid; done
+
+# Perl one liner sub
+egrep "hich does not include base" /var/log/aspera.log | awk '{print $9}' | perl -pi -e 's|//|/|g' > /tmp/foo3
+# bash for if loop
+for i in $(seq 2); do $(echo "kill -s 2 29304");if [ "$i" = 1 ]; then sleep 12; fi; done
+
+
+#go concurrency example
+package main
+
+import (
+  "fmt"
+  "time"
+  "os"
+  "os/signal"
+  "syscall"
+)
+
+func main() {
+  sig := make(chan os.Signal, 1)
+  signal.Notify(sig, syscall.SIGINT, syscall.SIGUSR2, syscall.SIGUSR1)
+
+  go func() {
+    var count int = 1
+    var intr_count int = 0
+
+    for {
+       select {
+         case sig1 := <-sig:
+           fmt.Printf("Received signal %d\n", sig1)
+           if sig1 == syscall.SIGUSR2 || sig1 == syscall.SIGUSR1 {
+             fmt.Printf("Resetting counter to 1\n")
+             count = 1
+           } else if sig1 == syscall.SIGINT {
+             intr_count += 1
+             if intr_count == 1 {
+               fmt.Printf("Hit Ctrl-c again to quit\n")
+             } else {
+               fmt.Printf("Quitting\n")
+               os.Exit(0)
+             }
+           }
+
+         default:
+       }
+
+       fmt.Printf("count:= %d\n", count)
+       count += 1
+       time.Sleep(1*time.Second)
+    }
+  } ()
+
+  var input string
+  fmt.Scanln(&input)
+}
+
+#cut
+strings /proc/32170/environ  | cut -d "=" -f1 
+#awk
+strings /proc/32170/environ  | awk -F '=' '{ print $1 }' 
+
+
+######### running tasks one by one
+#!/bin/bash
+
+# FD 3 will be tied to a named pipe.
+mkfifo pipe; exec 3<>pipe
+
+# This is the job we're running.
+s() {
+      echo Sleeping $1
+        sleep $1
+}
+
+# Start off with 3 instances of it.
+# Each time an instance terminates, write a newline to the named pipe.
+{ s 5; echo >&3; } &
+{ s 7; echo >&3; } &
+{ s 8; echo >&3; } &
+
+# Each time we get a line from the named pipe, launch another job.
+while read; do
+      { s $((RANDOM%5+7)); echo >&3; } &
+      done <&3
+# Node js concurrency example - a web server 
+var cluster = require('cluster');
+var http = require('http');
+var numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  // Fork workers.
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('worker ' + worker.pid + ' died');
+  });
+} else {
+  // Workers can share any TCP connection
+  // In this case its a HTTP server
+  http.createServer(function(req, res) {
+    res.writeHead(200);
+    res.end("hello world\n");
+  }).listen(8000);
+}
+
+# go example
+import (
+  "net/http"
+  "runtime"
+)
+
+func main() {
+  runtime.GOMAXPROCS(runtime.NumCPU())
+  handler := func(w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte("hello world\n"))
+  }
+  http.ListenAndServe(":8000", http.HandlerFunc(handler))
+}
+
+# python
+>>> import gevent
+>>> from gevent import socket
+>>> urls = ['www.google.com', 'www.example.com', 'www.python.org']
+>>> jobs = [gevent.spawn(socket.gethostbyname, url) for url in urls]
+>>> gevent.joinall(jobs, timeout=2)
+>>> [job.value for job in jobs]
+['74.125.79.106', '208.77.188.166', '82.94.164.162']
+# awk sum
+awk '{sum+=$1} END {print sum}'
+ tasks "jid=877" -c wtime --nh | tail -n+2 | awk -F : '{sum+=(*3600+*60+)/3600} END {print sum/NR}'
+# json base64
+json.loads((base64.b64decode(json.loads(items[0]).get("body"))))
+base64.b64encode(json.dumps(f))
+
+# Python generators
+#http://www.dabeaz.com/generators/Generators.pdf
+A Generator Solution
+• Let's use some generator expressions
+
+wwwlog = open("access-log")
+bytecolumn = (line.rsplit(None,1)[1] for line in wwwlog)
+bytes = (int(x) for x in bytecolumn if x != '-')
+print "Total", sum(bytes)
+
+• Whoa! That's different!
+• Less code
+• A completely different programming style
+
+# AWK
+awk '{ total += $NF } END { print total }' big-access-log
+# Print the last field in a space delimited file
+awk '{print $NF}' /tmp/vlc-log.txt
+# print the number of total lines in a file 
+awk 'END {print NR}' /tmp/vlc-log.txt
+lspci -vnn | grep VGA | grep  -oE "[[:alnum:]]{4}:[[:alnum:]]{4}"  | awk -F: {site=http://pci-ids.ucw.cz/read/PC} {printf curl -XGET site /%s/%s -s | grep itemname | head -1 | cut -d: -f2 \n, , } | sh
+export token2=e27f43794325d8c41116c1a65ff5781357e73ef2cc07c999890c9634fae024ff
+export TOKEN=abd29d3aa90ccc23936979c4c741a193f32852d7701a0c0e8f0fc5fdf5529ce0
+
+# Digital ocean API
+
+# JSON
+curl -X POST "https://api.digitalocean.com/v2/droplets"    -d'{"name": "coreos-2","region":"nyc3","size":"512mb","private_networking":true,"image":"coreos-stable","user_data":                                                                                   
+"#cloud-config                                                                                                                                                                                                                                                                            
+
+coreos:
+  etcd:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new
+    discovery: https://discovery.etcd.io/391124ff0f0ab6faf8e22a234c5b81b2            
+    # multi-region deployments, multi-cloud deployments, and droplets without        
+    # private networking need to use $public_ipv4                                    
+    addr: $private_ipv4:4001                                                         
+    peer-addr: $private_ipv4:7001                                                    
+  fleet:                                                                             
+    public-ip: $private_ipv4   # used for fleetctl ssh command                       
+  units:                                                                             
+    - name: etcd.service                                                             
+      command: start                                                                 
+    - name: fleet.service                                                            
+      command: start",                                                               
+      "ssh_keys":[647670,497527,497524]}'       -H "Authorization: Bearer $TOKEN2"       -H "Content-Type: application/json"
+
+# Python
+
+import digitalocean
+
+for f in range(3): digitalocean.Droplet(token="e27f43794325d8c41116c1a65ff5781357e73ef2cc07c999890c9634fae024ff", name="coreos-{0}".format(f+1), region="nyc3", size="512mb", private_networking=True, image="coreos-stable", user_data=user_data, ssh_keys=[647670, 497527, 497524]).create()
+
+user_data = """
+#cloud-config
+coreos:
+      etcd:
+            # generate a new token for each unique cluster from https://discovery.etcd.io/new
+            discovery: https://discovery.etcd.io/391124ff0f0ab6faf8e22a234c5b81b2
+            # multi-region deployments, multi-cloud deployments, and droplets without
+            # private networking need to use $public_ipv4
+            addr: $private_ipv4:4001
+            peer-addr: $private_ipv4:7001
+          fleet:
+                public-ip: $private_ipv4   # used for fleetctl ssh command
+              units:
+                    - name: etcd.service
+                      command: start
+                    - name: fleet.service
+                      command: start"""
+
+for d in manager.get_all_droplets():
+    d.destroy()
+
+# PyCurl
+c = pycurl.Curl()
+c.setopt(c.URL, 'https://api.digitalocean.com/v2/droplets')
+c.setopt(c.HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer e27f43794325d8c41116c1a65ff5781357e73ef2cc07c999890c9634fae024ff'])
+c.setopt(c.POSTFIELDS, postfields)
+c.perform()
+
+post_data = {"name":"do-nyc-coreos1","region":"nyc3","size":"512mb","image":"coreos-stable","ssh_keys":[647670, 497527, 497524],"backups":False,"ipv6":False,"private_networking":True,"user_data":"""\ 
+#cloud-config                                                                                                                                                                                           
+coreos:                                                                                                                                                                                                 
+      etcd:                                                                                                                                                                                             
+            # generate a new token for each unique cluster from https://discovery.etcd.io/new                                                                                                           
+            discovery: https://discovery.etcd.io/0a50fc91e87461af573b70930c69e96e                                                                                                                       
+            # multi-region deployments, multi-cloud deployments, and droplets without                                                                                                                   
+            # private networking need to use $public_ipv4                                                                                                                                               
+            addr: $private_ipv4:4001                                                                                                                                                                    
+            peer-addr: $private_ipv4:7001                                                                                                                                                               
+          units:                                                                                                                                                                                        
+                - name: etcd.service                                                                                                                                                                    
+                  command: start                                                                                                                                                                        
+                - name: fleet.service                                                                                                                                                                   
+                  command: start                                                                                                                                                                        
+            """,                                                                                                                                                                                        
+            }                                                                                                                                                                                           
+post_data                                                                                                                                                                                               
+
+postfields = urlencode(post_data)                                                                                                                                                                       
+from urllib import urlencode                                                                                                                                                                            
+postfields = urlencode(post_data) 
+
+
+from StringIO import StringIO                                                                           
+buffer = StringIO()                                                                                     
+help(StringIO)                                                                                          
+c = pycurl.Curl()                                                                                       
+c.setopt(c.URL, 'https://api.digitalocean.com/v2/images?per_page=100&type=distribution')                
+c.setopt(c.HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer e27f43794325d8c41116c1a65ff5781357e73ef2cc07c999890c9634fae024ff'])
+#error c.setopt(c.WRITEDATA, buffer)                                                                                                                       
+c.setopt(c.WRITEFUNCTION, buffer.write)                                                                                                             
+c.perform()                                                                                                                                         
+body = buffer.getvalue()                                                                                                                            
+body                                                                                                                                                
+type(body)                                                                                                                                          
+# coreos essential comands - status and logs
+systemctl status -l service
+journalctl -b -u service
+
+cd /run/systemd/system
+ls -F
+etcd.service.d/  fleet.service.d/  oem-cloudinit.service
+
+cat etcd.servicd.d/20-cloudinit.conf
+[Service]
+Environment="ETCD_ADDR=10.132.247.162:4001"
+Environment="ETCD_DISCOVERY=https://discovery.etcd.io/"
+Environment="ETCD_NAME=795de101bcd24a3a96aa698f770f0074"
+Environment="ETCD_PEER_ADDR=10.132.247.162:7001"
+
+# more on this url https://www.digitalocean.com/community/tutorials/how-to-troubleshoot-common-issues-with-your-coreos-servers
+
+# find a module installation path
+python -c "import sys; sys.path = sys.path[1:]; import django; print(django.__path__)"
+
+# trick to find out the list of crons being run by all users
+for user in $(cut -f1 -d: /etc/passwd); do echo $user; crontab -u $user -l; done
+
+# httpry
+httpry -r 08-02-2012_00\:00\:01.pcap -m get -f timestamp,source-ip,dest-ip,host 'host (192.168.1.87 or 192.168.1.14)'
+
+
+# Mongo db - match, in operator
+> db.foo.find({'name' : { $in : [/abhi/, /abhishek/]}})
+{ "_id" : ObjectId("544b83eda2b768c3042e9c6a"), "name" : "abhishek pareek" }
+{ "_id" : ObjectId("544b83e3a2b768c3042e9c69"), "set" : { "game" : "foo" }, "name" : "abhishek", "game" : "foo" }
+> db.foo.find({'name' : { $regex : /abhi/}})
+{ "_id" : ObjectId("544b83eda2b768c3042e9c6a"), "name" : "abhishek pareek" }
+{ "_id" : ObjectId("544b83e3a2b768c3042e9c69"), "set" : { "game" : "foo" }, "name" : "abhishek", "game" : "foo" }
+> db.foo.aggregate({$match: {'name' : 'abhishek'}})
+{ "_id" : ObjectId("544b83e3a2b768c3042e9c69"), "set" : { "game" : "foo" }, "name" : "abhishek", "game" : "foo" }
+> db.articles.aggregate( [
+...                         { $match : { score : { $gt : 70, $lte : 90 } } },
+...                         { $group: { _id: null, count: { $sum: 1 } } }
+...                        ] );
+>
+>
+bye
+
+#git reset to throw away uncommitted changes
+git reset --hard; git clean -fd
