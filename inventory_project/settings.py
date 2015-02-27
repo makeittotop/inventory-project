@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 
     'hardware',
     'software',
+    'employees',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +59,7 @@ ROOT_URLCONF = 'inventory_project.urls'
 WSGI_APPLICATION = 'inventory_project.wsgi.application'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -100,3 +102,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
