@@ -73,7 +73,7 @@ class Asset_Detail(models.Model):
 
     asset_sale_price = models.FloatField('Sale Price', null=True, blank=True)
 
-    asset_date_of_purchase = models.DateTimeField('Purchase Date', null=True, blank=True)
+    asset_date_of_purchase = models.DateField('Purchase Date', null=True, blank=True)
 
     STATUS_CHOICES = (
       ('in_use', 'In Use'),
