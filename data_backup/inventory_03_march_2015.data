@@ -1,0 +1,1358 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO abhishek;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO abhishek;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO abhishek;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO abhishek;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO abhishek;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO abhishek;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO abhishek;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO abhishek;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO abhishek;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO abhishek;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO abhishek;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO abhishek;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO abhishek;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO abhishek;
+
+--
+-- Name: employee_employee; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE employee_employee (
+    id integer NOT NULL,
+    employee_first_name character varying(200) NOT NULL,
+    employee_last_name character varying(200) NOT NULL,
+    employee_gender smallint NOT NULL,
+    employee_country character varying(200),
+    employee_dob date NOT NULL,
+    employee_personal_email character varying(200) NOT NULL,
+    employee_personal_contact_number character varying(200) NOT NULL,
+    employee_passport_number character varying(200) NOT NULL,
+    employee_code character varying(200) NOT NULL,
+    employee_hire_date date NOT NULL,
+    employee_end_hire_date date,
+    employee_department character varying(200) NOT NULL,
+    employee_status character varying(200) NOT NULL,
+    employee_notes text,
+    employee_photo character varying(100),
+    employee_official_email character varying(200)
+);
+
+
+ALTER TABLE public.employee_employee OWNER TO abhishek;
+
+--
+-- Name: employee_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE employee_employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employee_employee_id_seq OWNER TO abhishek;
+
+--
+-- Name: employee_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE employee_employee_id_seq OWNED BY employee_employee.id;
+
+
+--
+-- Name: employees_employee; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE employees_employee (
+    id integer NOT NULL,
+    employee_first_name character varying(200) NOT NULL,
+    employee_last_name character varying(200) NOT NULL,
+    employee_gender smallint NOT NULL,
+    employee_country character varying(200),
+    employee_dob date NOT NULL,
+    employee_personal_email character varying(200) NOT NULL,
+    employee_personal_contact_number character varying(200) NOT NULL,
+    employee_passport_number character varying(200) NOT NULL,
+    employee_photo character varying(100),
+    employee_code character varying(200) NOT NULL,
+    employee_hire_date date NOT NULL,
+    employee_end_hire_date date,
+    employee_department character varying(200) NOT NULL,
+    employee_status character varying(200) NOT NULL,
+    employee_official_email character varying(200),
+    employee_notes text
+);
+
+
+ALTER TABLE public.employees_employee OWNER TO abhishek;
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE employees_employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.employees_employee_id_seq OWNER TO abhishek;
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE employees_employee_id_seq OWNED BY employees_employee.id;
+
+
+--
+-- Name: hardware_asset_detail; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE hardware_asset_detail (
+    id integer NOT NULL,
+    asset_category character varying(200) NOT NULL,
+    asset_manufacturer character varying(200) NOT NULL,
+    asset_model character varying(200) NOT NULL,
+    asset_purchase_price double precision,
+    asset_sale_price double precision,
+    asset_date_of_purchase date,
+    asset_status character varying(200) NOT NULL,
+    asset_condition character varying(200) NOT NULL,
+    asset_checkout character varying(200),
+    asset_notes text,
+    computer_id integer NOT NULL
+);
+
+
+ALTER TABLE public.hardware_asset_detail OWNER TO abhishek;
+
+--
+-- Name: hardware_asset_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE hardware_asset_detail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hardware_asset_detail_id_seq OWNER TO abhishek;
+
+--
+-- Name: hardware_asset_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE hardware_asset_detail_id_seq OWNED BY hardware_asset_detail.id;
+
+
+--
+-- Name: hardware_computer; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE hardware_computer (
+    id integer NOT NULL,
+    asset_cpu_cores integer NOT NULL,
+    asset_gfx_card character varying(200) NOT NULL,
+    asset_ram integer NOT NULL,
+    asset_hard_disk character varying(200) NOT NULL,
+    asset_external_nic character varying(200) NOT NULL,
+    asset_serial_number character varying(200) NOT NULL,
+    asset_name character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.hardware_computer OWNER TO abhishek;
+
+--
+-- Name: hardware_computer_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE hardware_computer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hardware_computer_id_seq OWNER TO abhishek;
+
+--
+-- Name: hardware_computer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE hardware_computer_id_seq OWNED BY hardware_computer.id;
+
+
+--
+-- Name: hardware_purchase_detail; Type: TABLE; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE TABLE hardware_purchase_detail (
+    id integer NOT NULL,
+    asset_lpo character varying(200) NOT NULL,
+    asset_invoice character varying(200) NOT NULL,
+    asset_supplier character varying(200) NOT NULL,
+    computer_id integer NOT NULL
+);
+
+
+ALTER TABLE public.hardware_purchase_detail OWNER TO abhishek;
+
+--
+-- Name: hardware_purchase_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: abhishek
+--
+
+CREATE SEQUENCE hardware_purchase_detail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hardware_purchase_detail_id_seq OWNER TO abhishek;
+
+--
+-- Name: hardware_purchase_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: abhishek
+--
+
+ALTER SEQUENCE hardware_purchase_detail_id_seq OWNED BY hardware_purchase_detail.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY employee_employee ALTER COLUMN id SET DEFAULT nextval('employee_employee_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY employees_employee ALTER COLUMN id SET DEFAULT nextval('employees_employee_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY hardware_asset_detail ALTER COLUMN id SET DEFAULT nextval('hardware_asset_detail_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY hardware_computer ALTER COLUMN id SET DEFAULT nextval('hardware_computer_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY hardware_purchase_detail ALTER COLUMN id SET DEFAULT nextval('hardware_purchase_detail_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add computer	7	add_computer
+20	Can change computer	7	change_computer
+21	Can delete computer	7	delete_computer
+22	Can add asset_ detail	8	add_asset_detail
+23	Can change asset_ detail	8	change_asset_detail
+24	Can delete asset_ detail	8	delete_asset_detail
+25	Can add purchase_ detail	9	add_purchase_detail
+26	Can change purchase_ detail	9	change_purchase_detail
+27	Can delete purchase_ detail	9	delete_purchase_detail
+28	Can add employee	10	add_employee
+29	Can change employee	10	change_employee
+30	Can delete employee	10	delete_employee
+31	Can add employee	11	add_employee
+32	Can change employee	11	change_employee
+33	Can delete employee	11	delete_employee
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$15000$fPjZLBHIYkgh$kWHSg/lCo4uhU+SDkltwwclRvWtFmTMFEE4WFCU7/uU=	2015-03-02 12:56:43.468856+04	t	admin			admin@barajoun.com	t	t	2015-02-25 18:40:40.774759+04
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2015-02-27 18:24:17.923318+04	1	Employee object	1		10	1
+2	2015-02-27 18:29:59.9687+04	1	Abhishek Pareek	2	Changed employee_image.	10	1
+3	2015-02-27 18:31:31.630925+04	1	Abhishek Pareek	2	Changed employee_image.	10	1
+4	2015-02-27 18:49:15.435946+04	1	Abhishek Pareek	2	Changed employee_photo.	10	1
+5	2015-02-27 19:01:45.126977+04	1	Abhishek Pareek	2	No fields changed.	10	1
+6	2015-02-27 19:31:16.797155+04	2	Anshul Tiwari	1		10	1
+7	2015-02-27 19:35:07.455283+04	2	Anshul Tiwari	2	Changed employee_photo.	10	1
+8	2015-02-27 19:36:31.347595+04	4	Foo Bar	1		10	1
+9	2015-02-27 20:29:57.054142+04	4	Foo Bar	2	Changed employee_photo.	10	1
+10	2015-02-27 21:10:26.447345+04	1	Abhishek Pareek	1		11	1
+11	2015-02-27 21:17:50.088271+04	1	Abhishek Pareek	2	No fields changed.	11	1
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	log entry	admin	logentry
+2	permission	auth	permission
+3	group	auth	group
+4	user	auth	user
+5	content type	contenttypes	contenttype
+6	session	sessions	session
+7	computer	hardware	computer
+8	asset_ detail	hardware	asset_detail
+9	purchase_ detail	hardware	purchase_detail
+10	employee	employee	employee
+11	employee	employees	employee
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 1, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2015-02-25 18:40:06.736768+04
+2	auth	0001_initial	2015-02-25 18:40:07.228654+04
+3	admin	0001_initial	2015-02-25 18:40:07.356452+04
+4	hardware	0001_initial	2015-02-25 18:40:07.577254+04
+5	hardware	0002_auto_20150219_1806	2015-02-25 18:40:07.605596+04
+6	hardware	0003_auto_20150225_1450	2015-02-25 18:40:07.679685+04
+7	hardware	0004_auto_20150225_1454	2015-02-25 18:40:07.70841+04
+8	sessions	0001_initial	2015-02-25 18:40:07.805981+04
+9	employee	0001_initial	2015-02-27 16:36:56.674057+04
+10	hardware	0005_auto_20150227_1636	2015-02-27 16:36:56.776338+04
+11	employee	0002_auto_20150227_1713	2015-02-27 17:13:23.739921+04
+12	employee	0003_auto_20150227_1846	2015-02-27 18:46:35.294659+04
+13	employee	0004_auto_20150227_2057	2015-02-27 20:57:10.614475+04
+14	hardware	0005_auto_20150302_1820	2015-03-02 18:21:40.803374+04
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 14, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+qcrk9k2jytdgvjtgop38v5oe0muwppov	NTgxZWI0OWUzOTljMTRjZWM1MGFiZjFhMWQ0MjFlY2YzMTdiM2Y2Mjp7Il9hdXRoX3VzZXJfaGFzaCI6ImFiODkxNzc1ZDc5OWJmYWUwZWRlOTM5OWM4OWZmYjkwNGRiN2NkMTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9	2015-03-11 18:42:37.331477+04
+acgimxrcgod4wkjatre935nz6fciaghp	NTgxZWI0OWUzOTljMTRjZWM1MGFiZjFhMWQ0MjFlY2YzMTdiM2Y2Mjp7Il9hdXRoX3VzZXJfaGFzaCI6ImFiODkxNzc1ZDc5OWJmYWUwZWRlOTM5OWM4OWZmYjkwNGRiN2NkMTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9	2015-03-13 15:50:58.339092+04
+wmxsrd68p6x098mvoneqzkexr3rypm2q	NTgxZWI0OWUzOTljMTRjZWM1MGFiZjFhMWQ0MjFlY2YzMTdiM2Y2Mjp7Il9hdXRoX3VzZXJfaGFzaCI6ImFiODkxNzc1ZDc5OWJmYWUwZWRlOTM5OWM4OWZmYjkwNGRiN2NkMTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOjF9	2015-03-16 12:56:43.475081+04
+\.
+
+
+--
+-- Data for Name: employee_employee; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY employee_employee (id, employee_first_name, employee_last_name, employee_gender, employee_country, employee_dob, employee_personal_email, employee_personal_contact_number, employee_passport_number, employee_code, employee_hire_date, employee_end_hire_date, employee_department, employee_status, employee_notes, employee_photo, employee_official_email) FROM stdin;
+1	abhishek	pareek	1	India	1984-09-17	makeittotop@gmail.com	00918106684339	j3214500	12345	2015-02-27	\N	pipeline	active	Test	photos/cloud_EUzMPhq.jpg	\N
+2	ANSHUL	TIWARI	2	India	2015-02-27	a@b.com	1234567890	34566789	546546565	2015-02-27	\N	compositing	active	test		\N
+4	foo	bar	1	India	1984-09-17	makeittotop@gmail.com	00918106684339	j3214500	12345	2015-02-27	\N	rigging	inactive	test	photos/cloud_qcv173l.jpg	\N
+\.
+
+
+--
+-- Name: employee_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('employee_employee_id_seq', 4, true);
+
+
+--
+-- Data for Name: employees_employee; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY employees_employee (id, employee_first_name, employee_last_name, employee_gender, employee_country, employee_dob, employee_personal_email, employee_personal_contact_number, employee_passport_number, employee_photo, employee_code, employee_hire_date, employee_end_hire_date, employee_department, employee_status, employee_official_email, employee_notes) FROM stdin;
+1	Abhishek	Pareek	1	India	2015-02-27	makeittotop@gmail.com	00918106684339	J3214500	photos/cloud_e5wCpwe.jpg	12345	2015-02-27	\N	pipeline	active	foo@gmail.com	
+\.
+
+
+--
+-- Name: employees_employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('employees_employee_id_seq', 1, true);
+
+
+--
+-- Data for Name: hardware_asset_detail; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY hardware_asset_detail (id, asset_category, asset_manufacturer, asset_model, asset_purchase_price, asset_sale_price, asset_date_of_purchase, asset_status, asset_condition, asset_checkout, asset_notes, computer_id) FROM stdin;
+\.
+
+
+--
+-- Name: hardware_asset_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('hardware_asset_detail_id_seq', 1, false);
+
+
+--
+-- Data for Name: hardware_computer; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY hardware_computer (id, asset_cpu_cores, asset_gfx_card, asset_ram, asset_hard_disk, asset_external_nic, asset_serial_number, asset_name) FROM stdin;
+\.
+
+
+--
+-- Name: hardware_computer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('hardware_computer_id_seq', 1, false);
+
+
+--
+-- Data for Name: hardware_purchase_detail; Type: TABLE DATA; Schema: public; Owner: abhishek
+--
+
+COPY hardware_purchase_detail (id, asset_lpo, asset_invoice, asset_supplier, computer_id) FROM stdin;
+\.
+
+
+--
+-- Name: hardware_purchase_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: abhishek
+--
+
+SELECT pg_catalog.setval('hardware_purchase_detail_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_45f3b1d93ec8c61c_uniq; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_45f3b1d93ec8c61c_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: employee_employee_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_employee
+    ADD CONSTRAINT employee_employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employees_employee_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY employees_employee
+    ADD CONSTRAINT employees_employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hardware_asset_detail_computer_id_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY hardware_asset_detail
+    ADD CONSTRAINT hardware_asset_detail_computer_id_key UNIQUE (computer_id);
+
+
+--
+-- Name: hardware_asset_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY hardware_asset_detail
+    ADD CONSTRAINT hardware_asset_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hardware_computer_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY hardware_computer
+    ADD CONSTRAINT hardware_computer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hardware_purchase_detail_computer_id_key; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY hardware_purchase_detail
+    ADD CONSTRAINT hardware_purchase_detail_computer_id_key UNIQUE (computer_id);
+
+
+--
+-- Name: hardware_purchase_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+ALTER TABLE ONLY hardware_purchase_detail
+    ADD CONSTRAINT hardware_purchase_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_253ae2a6331666e8_like; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_253ae2a6331666e8_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_51b3b110094b8aae_like; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_51b3b110094b8aae_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_461cfeaa630ca218_like; Type: INDEX; Schema: public; Owner: abhishek; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_461cfeaa630ca218_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: auth_content_type_id_508cf46651277a81_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_content_type_id_508cf46651277a81_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: djan_content_type_id_697914295151027a_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT djan_content_type_id_697914295151027a_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: hardware_a_computer_id_5bf791b7a94cf0fb_fk_hardware_computer_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY hardware_asset_detail
+    ADD CONSTRAINT hardware_a_computer_id_5bf791b7a94cf0fb_fk_hardware_computer_id FOREIGN KEY (computer_id) REFERENCES hardware_computer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: hardware_p_computer_id_14e843c034494815_fk_hardware_computer_id; Type: FK CONSTRAINT; Schema: public; Owner: abhishek
+--
+
+ALTER TABLE ONLY hardware_purchase_detail
+    ADD CONSTRAINT hardware_p_computer_id_14e843c034494815_fk_hardware_computer_id FOREIGN KEY (computer_id) REFERENCES hardware_computer(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

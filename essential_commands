@@ -17,6 +17,16 @@ sudo ldapsearch -x -LLL -h 172.16.10.10:389 -D "abhishek@barajoun.local" -w "qwe
 > psql --user abhishek -h localhost postgres
 > sudo vi /etc/postgresql/9.3/main/pg_hba.conf
 
+ 1220  sudo mv /var/lib/pgsql/9.3/data /var/lib/pgsql/9.3/data.bak
+ 1221  sudo service postgresql-9.3 stop
+ 1234  sudo service postgresql-9.3 initdb
+ 1235  sudo ls -l /var/lib/pgsql/9.3/data
+ 1236  sudo service postgresql-9.3 start
+ 1237  sudo service postgresql-9.3 status
+ 1238  sudo su - postgres
+ 1239  psql -d postgres
+# https://wiki.postgresql.org/wiki/First_steps
+
 > nmap -sn 16.16.16.2
 > nmap -sn -O 16.16.16.2
 > sudo nmap -sn -O 16.16.16.2
@@ -753,3 +763,17 @@ bye
 
 #git reset to throw away uncommitted changes
 git reset --hard; git clean -fd
+
+#tractor
+import tractor.api.query as tq
+tq.jobs
+help(tq.jobs)
+help(tq.setEngineClientParam)
+tq.setEngineClientParam(hostname='lic', port=1503)
+tq.jobs('owner = ashwin')
+len(tq.jobs('owner = ashwin', archive=True))
+foo = tq.jobs('owner=ashwin and deletetime', sortby=['deletetime'], archive=True)
+tq.undelete("jid=11111")
+tq.undelete("jid=12186")
+tq.delete("jid=11111")
+

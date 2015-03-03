@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 
     'hardware',
     'software',
-    'employees',
+    'hr_data',
 )
 
 MIDDLEWARE_CLASSES = (
