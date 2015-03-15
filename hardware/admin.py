@@ -5,7 +5,6 @@ from django.contrib.auth.models import Group
 from hardware.models import Computer, Asset_Detail, Purchase_Detail
 
 # Register your models here.
-
 class Asset_Detail_Inline(admin.StackedInline):
     model = Asset_Detail
     #extra = 0
