@@ -35,11 +35,15 @@ class Employee_Personal_Detail_Admin(admin.ModelAdmin):
         return obj.department.capitalize()
     department_cap.short_description = "Department"    
 
+    class Meta:
+        verbose_name = 'Employee Personal Detail'
+        verbose_name_plural = 'Employee Personal Details'
+
 admin.site.register(Employee_Personal_Detail, Employee_Personal_Detail_Admin)
 
 class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
     fieldsets = [
-        ('Details', {'fields' : ['employee', 'available_pto', ]}),
+        ('Details', {'fields' : ['employee', 'employee_hire_date', 'available_pto', ]}),
         ('Vacations', {'fields' : []}),
     ]
     list_display = ('employee', 'available_pto', 'test')
@@ -59,5 +63,9 @@ class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
         
     available_pto.short_description = 'Available P.T.O.'
     available_pto.allow_tags = True        
+
+    class Meta:
+        verbose_name = 'Employee Vacation'
+        verbose_name_plural = 'Employee Vacations'
 
 admin.site.register(Employee_Vacation_Detail, Employee_Vacation_Detail_Admin)

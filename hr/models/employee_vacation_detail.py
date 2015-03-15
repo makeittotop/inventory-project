@@ -10,6 +10,10 @@ class Employee_Vacation_Detail(models.Model):
     def __str__(self):
     	return "{0}".format(self.employee.first_name.capitalize())
 
+    class Meta:
+        verbose_name = 'Employee Vacation Detail'
+        verbose_name_plural = 'Employee Vacation Details'    	
+
 class Employee_Vacation(models.Model):
     vacation_choices = (
         ('AL', 'Annual Leave'),
@@ -29,3 +33,9 @@ class Employee_Vacation(models.Model):
     vacation_note = models.TextField("Description", null=True, blank=True)
     
     employee_vacation_detail = models.ForeignKey(Employee_Vacation_Detail, related_name="vacations")
+
+    class Meta:
+        verbose_name = 'Employee Vacation'
+        verbose_name_plural = 'Employee Vacations'
+    
+
