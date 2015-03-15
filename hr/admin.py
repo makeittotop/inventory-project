@@ -52,8 +52,8 @@ class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
         return "{0:.2f}".format(total_hire_months * 2.5)
 
     def test(self, inst):
-        if len(inst.employee_vacation_set.all()):
-            return "Vacation start date: {0}".format(inst.employee_vacation_set.all()[0].vacation_start)
+        if len(inst.vacations.all()):
+            return "Vacation start date: {0}".format(inst.vacations.all()[0].vacation_start)
         else:
             return "No vacation scheduled."    
         

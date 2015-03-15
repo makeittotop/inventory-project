@@ -28,4 +28,4 @@ class Employee_Vacation(models.Model):
     vacation_end = models.DateField("End day of vacation", null=False, blank=False);
     vacation_note = models.TextField("Description", null=True, blank=True)
     
-    employee_vacation_detail = models.ForeignKey(Employee_Vacation_Detail)
+    employee_vacation_detail = models.ForeignKey(Employee_Vacation_Detail, related_name="vacations")
