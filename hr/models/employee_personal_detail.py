@@ -45,7 +45,7 @@ class Employee_Personal_Detail(models.Model):
             return mark_safe(u'<img src="%s" width=60 height=60 />' % (self.photo.url))
         else:
             return mark_safe(u'<img src="%s" width=60 height=60 />' % ('/media/photos/placeholder.png'))
-    thumb.short_description = 'Photo'
+    thumb.short_description = 'Photo Preview'
     thumb.allow_tags = True
 
     def __str__(self):
