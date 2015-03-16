@@ -35,10 +35,6 @@ class Employee_Personal_Detail_Admin(admin.ModelAdmin):
         return obj.department.capitalize()
     department_cap.short_description = "Department"    
 
-    class Meta:
-        verbose_name = 'Employee Personal Detail'
-        verbose_name_plural = 'Employee Personal Details'
-
 admin.site.register(Employee_Personal_Detail, Employee_Personal_Detail_Admin)
 
 class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
@@ -51,7 +47,7 @@ class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
     inlines = [Employee_Vacation_Inline]
 
     def available_pto(self, inst):
-        total_hire_days = datetime.date.today() - inst.employee.hire_date
+        total_hire_days = datetime.date.today() - inst.employee_hire_date
         total_hire_months = float(total_hire_days.days) / 30
         return "{0:.2f}".format(total_hire_months * 2.5)
 

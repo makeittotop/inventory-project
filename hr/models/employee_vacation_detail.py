@@ -5,7 +5,7 @@ from hr.models.employee_personal_detail import Employee_Personal_Detail
 
 class Employee_Vacation_Detail(models.Model):
     employee = models.OneToOneField(Employee_Personal_Detail, primary_key=True)
-    employee_hire_date = models.DateField("Hire Date", blank=False, null=False)
+    employee_hire_date = models.DateField("Base date", blank=False, null=False)
 
     def __str__(self):
     	return "{0}".format(self.employee.first_name.capitalize())
