@@ -52,5 +52,6 @@ class Employee_Personal_Detail(models.Model):
         return "{0} {1}".format(self.first_name.capitalize(), self.last_name.capitalize())
 
     class Meta:
+        ordering = ('first_name', )
         verbose_name = 'Employee Personal Detail'
         verbose_name_plural = 'Employee Personal Details'    
