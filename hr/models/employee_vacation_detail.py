@@ -30,7 +30,7 @@ class Employee_Vacation(models.Model):
 	)
     vacation_type = models.CharField("Type of vacation", choices=vacation_choices, null=False, blank=False, max_length=200)
     vacation_start = models.DateField("Start day of vacation", null=False, blank=False);
-    vacation_end = models.DateField("End day of vacation", null=False, blank=False);
+    vacation_end = models.DateField("Last day of vacation", null=False, blank=False);
     vacation_note = models.TextField("Description", null=True, blank=True)
     
     employee_vacation_detail = models.ForeignKey(Employee_Vacation_Detail, related_name="vacations")

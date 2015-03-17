@@ -4,11 +4,15 @@ from django.utils.safestring import mark_safe
 
 from hr.models.employee_personal_detail import Employee_Personal_Detail
 from hr.models.employee_vacation_detail import Employee_Vacation_Detail, Employee_Vacation
-from hr.models.employee_vacation_request_detail import Employee_Vacation_Request_Detail, Employee_Vacation_Request
+from hr.models.employee_vacation_request_detail import Employee_Vacation_Request
 
 import datetime
 
 # Register your models here.
+class Employee_Vacation_Inline(admin.StackedInline):
+    model = Employee_Vacation
+    extra = 0
+
 class Employee_Personal_Detail_Admin(admin.ModelAdmin):
     fieldsets = [
         ('Personal Information', {'fields' : ['first_name', 'last_name', 'gender', 'country', 'dob', 'personal_email', 'personal_contact_number', \
@@ -34,14 +38,6 @@ class Employee_Personal_Detail_Admin(admin.ModelAdmin):
 
 admin.site.register(Employee_Personal_Detail, Employee_Personal_Detail_Admin)
 
-
-
-
-
-class Employee_Vacation_Inline(admin.StackedInline):
-    model = Employee_Vacation
-    extra = 0
-
 class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
     fieldsets = [
         ('Details', {'fields' : ['employee', 'employee_hire_date', 'available_pto', ]}),
@@ -52,7 +48,7 @@ class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
     inlines = [Employee_Vacation_Inline]
 
     def available_pto(self, inst):
-        total_hire_days = datetime.date.today() - inst.employee.hire_date
+        total_hire_days = datetime.date.today() - inst.employee_hire_date
         total_hire_months = float(total_hire_days.days) / 30
         return "{0:.2f}".format(total_hire_months * 2.5)
 
@@ -71,26 +67,27 @@ class Employee_Vacation_Detail_Admin(admin.ModelAdmin):
 
 admin.site.register(Employee_Vacation_Detail, Employee_Vacation_Detail_Admin)
 
+class Employee_Vacation_Request_Admin(admin.ModelAdmin):
+    fieldsets = [
+        ('Vacation Request', {'fields' : ['employee', 'vacation_request_start', 'vacation_request_end', 'vacation_request_note']}),
+    ]
+    readonly_fields = ('employee', )
+    list_display = ('employee', )
 
+admin.site.register(Employee_Vacation_Request, Employee_Vacation_Request_Admin)
 
-
-
-class Employee_Vacation_Request_Inline(admin.StackedInline):
-    model = Employee_Vacation_Request
-    extra = 0
-
+'''
 class Employee_Vacation_Request_Detail_Admin(admin.ModelAdmin):
     fieldsets = [
-        ('Details', {'fields' : ['employee', ]}),
+        ('Details', {'fields' : ['available_pto', ]}),
         ('Vacations', {'fields' : []}),
     ]
-    list_display = ('employee',  )
-    inlines = [Employee_Vacation_Request_Inline]
-    #readonly_fields = ('available_pto', )
+    list_display = ('employee', 'available_pto', )
+    readonly_fields = ('available_pto', )
 
     def available_pto(self, inst):
-        total_hire_days = datetime.date.today() - inst.employee.hire_date
+        total_hire_days = datetime.date.today() - inst.employee_hire_date
         total_hire_months = float(total_hire_days.days) / 30
         return "{0:.2f}".format(total_hire_months * 2.5)
+'''
 
-admin.site.register(Employee_Vacation_Request_Detail, Employee_Vacation_Request_Detail_Admin)
