@@ -15,7 +15,7 @@ class Employee_Personal_Detail(models.Model):
     dob = models.DateField('Date of Birth', blank=True)
     personal_email = models.EmailField('Personal Email', max_length=200, blank=False)
     personal_contact_number = models.CharField('Contact Number', max_length=200, blank=False)
-    passport_number = models.CharField('Passport Number', max_length=200, blank=False)
+    passport_number = models.CharField('Passport Number', max_length=200, blank=True, null=True)
     photo = models.ImageField('Employee Photo', upload_to='photos', null=True, blank=True)
 
     code = models.CharField('Employee Code', max_length=200, blank=False)
